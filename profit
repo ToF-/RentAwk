@@ -2,21 +2,26 @@
 
 
 BEGIN { profit=0 }
-{ if ($2 == "CASH") cash($1) 
-    else rent($1,$3,$4) }
+
+{ if ($2 == "CASH") 
+    cash($1) 
+    else 
+    rent($1,$3,$4) }
+
 END { print profit }
 
 function cash(time) {
     t = key(time)
-    p = plan[t]
-    if (p > profit) profit = p;
+    if (plan[t] > profit)
+        profit = plan[t];
 }
 
 function rent(time,duration,price) {
     cash(time) 
-    e = key(time+duration)
-    p = profit + price
-    if (plan[e] < p) plan[e] = p
+    e = key(time + duration)
+    p = profit + price 
+    if (plan[e] < p) 
+        plan[e] = p
 }
 function key(t) {
     return(sprintf("%07d",t))
