@@ -1,0 +1,4 @@
+#! /usr/bin/awk -f
+
+{ printf "%07d CASH\n%07d RENT %07d %07d\n", $1+$2, $1, $2, $3 }
+
